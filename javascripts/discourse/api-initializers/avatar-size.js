@@ -9,6 +9,7 @@ export default apiInitializer((api) => {
   class AvatarSize extends Component {
     @service site;
 
+    /*
     @action
     avatarSize() {
       // Change avatar size on desktop
@@ -24,13 +25,17 @@ export default apiInitializer((api) => {
     }
 
     // old widget code
-    get oldAvatarSize(/* api */) {
+    get oldAvatarSize(api) {
       // Change avatar size on desktop
       api.changeWidgetSetting("post-avatar", "size", 60);
     }
+    */
     
     if (!this.site.mobileView) {
-      this.avatarSize();
+      api.registerValueTransformer(
+        "post-avatar-size",
+        () => 60
+      );
     }
   }
 });

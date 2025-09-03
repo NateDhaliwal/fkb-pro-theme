@@ -6,36 +6,29 @@ import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer((api) => {
   // const site = api.container.lookup("service:site");
-  class AvatarSize extends Component {
-    @service site;
-
-    /*
-    @action
-    avatarSize() {
-      // Change avatar size on desktop
-      api.registerValueTransformer(
-        "post-avatar-size",
-        () => 60
-      );
-      
-      // wrap the old widget code silencing the deprecation warnings
-      withSilencedDeprecations("discourse.post-stream-widget-overrides", () =>
-        oldAvatarSize(api)
-      );
-    }
-
-    // old widget code
-    get oldAvatarSize(api) {
-      // Change avatar size on desktop
-      api.changeWidgetSetting("post-avatar", "size", 60);
-    }
-    */
+  function avatarSize() {
+    // Change avatar size on desktop
+    api.registerValueTransformer(
+      "post-avatar-size",
+      () => 60
+    );
     
-    if (!this.site.mobileView) {
-      api.registerValueTransformer(
-        "post-avatar-size",
-        () => 60
-      );
-    }
+    // wrap the old widget code silencing the deprecation warnings
+    withSilencedDeprecations("discourse.post-stream-widget-overrides", () =>
+      oldAvatarSize(api)
+    );
+  }
+
+  // old widget code
+  function oldAvatarSize(api) {
+    // Change avatar size on desktop
+    api.changeWidgetSetting("post-avatar", "size", 60);
+  }
+  
+  if (!this.site.mobileView) {
+    api.registerValueTransformer(
+      "post-avatar-size",
+      () => 60
+    );
   }
 });

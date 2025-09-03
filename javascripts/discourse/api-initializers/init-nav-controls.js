@@ -1,3 +1,4 @@
+import { service } from '@ember/service';
 import { withPluginApi } from "discourse/lib/plugin-api";
 
 export default {
@@ -5,8 +6,9 @@ export default {
 
   initialize() {
     withPluginApi("0.8.13", (api) => {
-      const site = api.container.lookup("site:main");
-      if (!site.mobileView) return;
+      @service site;
+      
+      if (!this.site.mobileView) return;
             
       let scrollTop = window.scrollY;
       const body = document.body;

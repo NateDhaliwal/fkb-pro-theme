@@ -2,7 +2,7 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { withSilencedDeprecations } from "discourse/lib/deprecated";
-import { apiInitializer } from "discourse/lib/plugin-api";
+import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer((api) => {
   // const site = api.container.lookup("service:site");

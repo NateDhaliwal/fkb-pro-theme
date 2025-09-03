@@ -6,9 +6,9 @@ export default {
 
   initialize() {
     withPluginApi("0.8.13", (api) => {
-      @service site;
+      const site = container.lookup("service:site");
       
-      if (!this.site.mobileView) return;
+      if (!site.mobileView) return;
             
       let scrollTop = window.scrollY;
       const body = document.body;

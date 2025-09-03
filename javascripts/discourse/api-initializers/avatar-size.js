@@ -1,3 +1,4 @@
+import { service } from '@ember/service';
 import { withSilencedDeprecations } from "discourse/lib/deprecated";
 import { withPluginApi } from "discourse/lib/plugin-api";
 
@@ -23,9 +24,9 @@ function oldAvatarSize(api) {
 export default {
   name: "avatar-size",
   initialize(container) {
-    const site = container.lookup("site:main");
+    @service site;
 
-    if (!site.mobileView) {
+    if (!this.site.mobileView) {
       withPluginApi((api) => {
         avatarSize(api);
       });

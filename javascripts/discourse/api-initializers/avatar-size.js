@@ -1,6 +1,6 @@
 import { service } from '@ember/service';
 import { withSilencedDeprecations } from "discourse/lib/deprecated";
-import { withPluginApi } from "discourse/lib/plugin-api";
+import { apiInitializer } from "discourse/lib/plugin-api";
 
 function avatarSize(api) {
   // Change avatar size on desktop
@@ -21,15 +21,11 @@ function oldAvatarSize(api) {
   api.changeWidgetSetting("post-avatar", "size", 60);
 }
 
-export default {
-  name: "avatar-size",
-  initialize(container) {
-    const site = container.lookup("service:site");
-
-    if (!site.mobileView) {
-      withPluginApi((api) => {
-        avatarSize(api);
-      });
-    }
-  },
-};
+export default apiInitializer((api) => {
+  // const site = api.container.lookup("service:site");
+  @service site;
+  
+  if (!this.site.mobileView) {
+    avatarSize(api);
+  }
+});

@@ -24,9 +24,9 @@ function oldAvatarSize(api) {
 export default {
   name: "avatar-size",
   initialize(container) {
-    @service site;
+    const site = ;
 
-    if (!this.site.mobileView) {
+    if (!site.mobileView) {
       withPluginApi((api) => {
         avatarSize(api);
       });
